@@ -1,7 +1,4 @@
-# ARG arch=amd64
 ARG os=build
-# ARG app=kbot
-# ARG APP_NAME=${app}-${os}-${arch}
 
 FROM quay.io/projectquay/golang:1.20 AS builder
 WORKDIR /go/src/app

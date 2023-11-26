@@ -16,7 +16,7 @@ format:
 	gofmt -s -w ./
 
 lint:
-	golangci-lint run
+	golint
 
 test:
 	go test -v
@@ -44,6 +44,7 @@ windows: format get
 	docker build --build-arg arch=${AMD_ARCH} --build-arg os=${WINDOWS} -t ${REGESTRY}/${APP}:${VERSION}-${WINDOWS}-${AMD_ARCH} .
 
 # all: windows linux macos
+go: build dive clean
 	
 image:
 	docker build -t ${REGESTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH} .
@@ -67,5 +68,6 @@ dive: image
 	dive --ci --lowestEfficiency=0.99 $(shell docker images -q | head -n 1)
 	
 clean:
-	rm kbot*
-	$(shell docker rmi -f $(shell docker images -q | head -n 1) ) 
+	if [ -f kbot ]; then rm kbot; fi; \
+	LAST_IMG=$$(docker images -q | head -n 1); \
+	if [ -n "$${LAST_IMG}" ]; then docker rmi -f $${LAST_IMG}; else echo "Image not found"; fi 
