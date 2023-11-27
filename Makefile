@@ -3,7 +3,7 @@ REGESTRY=ghcr.io/aldans
 VERSION=$(shell git describe --abbrev=0 --tags)-$(shell git rev-parse --short HEAD)
 APP_BIN_NAME=kbot
 
-TARGETOS=$(shell go env GOOS)
+TARGETOS=linux
 TARGETARCH=${shell go env GOARCH}
 
 LINUX=linux
@@ -51,7 +51,7 @@ go: build dive clean
  
 ## image: create docker container for current os and architecture
 image:
-	docker build --build-arg arch_build=${TARGETOS} app_name=${APP_BIN_NAME} -t ${REGESTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH} .
+	docker build --build-arg arch_build=${TARGETOS} -t ${REGESTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH} .
 
 image-win:
 	docker build --build-arg arch_build=${WINDOWS} -t ${REGESTRY}/${APP}:${VERSION}-${WINDOWS}-${AMD_ARCH} .
@@ -86,6 +86,6 @@ dive: image
 	dive --ci --lowestEfficiency=0.99 $(shell docker images -q | head -n 1)
 	
 clean:
-	@if [ -f "${APP_BIN_NAME}" ]; then rm "${APP_BIN_NAME}"; else echo " --> Log: File "${APP_BIN_NAME}" not found"; fi; \
+	if [ -f "${APP_BIN_NAME}" ]; then rm "${APP_BIN_NAME}"; else echo " --> Log: File "${APP_BIN_NAME}" not found"; fi; \
 	LAST_IMG=$$(docker images -q | head -n 1); \
 	if [ -n "$${LAST_IMG}" ]; then docker rmi -f $${LAST_IMG}; else echo " --> Log: Image not found"; fi 
