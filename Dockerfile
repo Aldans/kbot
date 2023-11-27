@@ -1,9 +1,8 @@
-ARG os=build
-
 FROM quay.io/projectquay/golang:1.20 AS builder
+ARG arch_build=build
 WORKDIR /go/src/app
 COPY . .
-RUN make $os
+RUN make $arch_build 
 
 FROM scratch
 WORKDIR /
