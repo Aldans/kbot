@@ -30,7 +30,8 @@ jobs:
         env:
           APP: "kbot"
           REGISTRY: ghcr.io/${{ github.actor }}
-        run: make image-lin-arm push-lin-arm
+        run: make image-lin push-lin
+        # run: make image-lin-arm push-lin-arm
         
   cd:
     name: CD
