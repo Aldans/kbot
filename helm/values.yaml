@@ -7,7 +7,7 @@ image:
   repository: ghcr.io/aldans/kbot
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v0.6.1-1-e9736ba"
-  arch: linux-arm64
+  arch: linux-amd64
 service:
   ports:
     - port: 8080
