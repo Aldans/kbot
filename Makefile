@@ -49,20 +49,21 @@ go: build dive clean
 	
 # create docker images for os/arch
  
-## image: create docker container for current os and architecture
-image:
+## image: create docker container for current os and app with current architecture
+image: build
 	docker build --build-arg arch_build=${TARGETOS} -t ${REGESTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH} .
 
-image-win:
+# container for app windows arch 
+image-win: windowd
 	docker build --build-arg arch_build=${WINDOWS} -t ${REGESTRY}/${APP}:${VERSION}-${WINDOWS}-${AMD_ARCH} .
 
-image-mac:
+image-mac: macos
 	docker build --build-arg arch_build=${MACOS} -t ${REGESTRY}/${APP}:${VERSION}-${MACOS}-${ARM_ARCH} .
 
-image-lin:
+image-lin: linux
 	docker build --build-arg arch_build=${LINUX} -t ${REGESTRY}/${APP}:${VERSION}-${LINUX}-${AMD_ARCH} .
 
-image-lin-arm:
+image-lin-arm: linux-arm
 	docker build --build-arg arch_build=${LIN_ARM} -t ${REGESTRY}/${APP}:${VERSION}-${LINUX}-${ARM_ARCH} .
 	
 	

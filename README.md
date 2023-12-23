@@ -27,6 +27,21 @@ You can send message to bot with additional command `/start hello` bot will repl
 The `develop` branch has a CI/CD pipeline defined in the ".github/workflows/cicd.yaml" file and is set up to 
 automatically build, push to ghrc.io, and deploy using ArgoCD to a k8s cluster after pushing a commit.
 
+**Update tag for new version**
+
+1. Run pull from remote repo.
+
+2. Create local commit, add tag, push commit and push tag to remote repo.
+   ```bash 
+   git push origin develop && git push --tags origin develop
+     or
+   git push origin develop --follow-tags 
+   ```
+   `--follow-tags` need config git `git config --global push.followTags true`
+   
+> If need change commit for current tag firs delete tag on remote repo and del local tag than create local commit, add local tag,
+  push commit and push tag to remote repo.
+
 ![process](https://i.imgur.com/2utXMAA.png)
 
 **Here all steps for CI.**
