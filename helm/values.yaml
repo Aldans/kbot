@@ -6,8 +6,9 @@ replicaCount: 1
 image:
   repository: ghcr.io/aldans/kbot
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.6.1-baa0c51"
-  arch: linux-amd64
+  tag: "v0.6.1-232ec67"
+  os: linux
+  arch: amd64
 service:
   ports:
     - port: 8080
