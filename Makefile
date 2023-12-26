@@ -3,7 +3,7 @@ REGESTRY=ghcr.io/aldans
 VERSION=$(shell git describe --abbrev=0 --tags)-$(shell git rev-parse --short HEAD)
 APP_BIN_NAME=kbot
 
-TARGETOS=linux
+TARGETOS=$(shell go env GOOS)
 TARGETARCH=${shell go env GOARCH}
 
 LINUX=linux
@@ -50,20 +50,20 @@ go: build dive clean
 # create docker images for os/arch
  
 ## image: create docker container for current os and app with current architecture
-image: build
+image:
 	docker build --build-arg arch_build=${TARGETOS} -t ${REGESTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH} .
 
 # container for app windows arch 
-image-win: windowd
+image-win:
 	docker build --build-arg arch_build=${WINDOWS} -t ${REGESTRY}/${APP}:${VERSION}-${WINDOWS}-${AMD_ARCH} .
 
-image-mac: macos
+image-mac:
 	docker build --build-arg arch_build=${MACOS} -t ${REGESTRY}/${APP}:${VERSION}-${MACOS}-${ARM_ARCH} .
 
-image-lin: linux
+image-lin:
 	docker build --build-arg arch_build=${LINUX} -t ${REGESTRY}/${APP}:${VERSION}-${LINUX}-${AMD_ARCH} .
 
-image-lin-arm: linux-arm
+image-lin-arm: 
 	docker build --build-arg arch_build=${LIN_ARM} -t ${REGESTRY}/${APP}:${VERSION}-${LINUX}-${ARM_ARCH} .
 	
 	

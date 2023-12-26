@@ -23,7 +23,7 @@ var kbotCmd = &cobra.Command{
 	Use:     "kbot",
 	Aliases: []string{"start"},
 	Short:   "Start is command for run kbot",
-	Long: `MVP telegram bot.`,
+	Long:    `MVP telegram bot.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Printf("kbot %s started", appVersion)
 		kbot, err := tb.NewBot(tb.Settings{
