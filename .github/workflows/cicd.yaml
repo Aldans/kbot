@@ -3,7 +3,7 @@ name: KBOT-CICD
 on: 
   push:
     branches:
-      - develop
+      - dev-v7.3
 
 jobs:
   ci:
