@@ -44,6 +44,8 @@ var kbotCmd = &cobra.Command{
 			switch payload {
 			case "hello":
 				err = m.Send(fmt.Sprintf("Hello from K-bot %s!", appVersion))
+			case "time":
+				err = m.Send(fmt.Sprintf("Current time on server is %s", time.Now().Format(time.RFC3339)))
 			}
 			return err
 		})
