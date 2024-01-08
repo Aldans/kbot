@@ -4,6 +4,7 @@
 Bot link on telegram t.me/odvk_bot 
 current version v7.3
 branch: dev-v7.3
+tag-update to: v0.7.3
 
 #### Pre-Required 
 
