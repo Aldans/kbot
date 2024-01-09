@@ -6,6 +6,8 @@ current version v7.3
 branch: dev-v7.3
 tag-update to: v0.7.3
 
+test-count: 2
+
 #### Pre-Required 
 
  - go 1.20
